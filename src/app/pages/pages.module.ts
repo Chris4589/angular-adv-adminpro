@@ -7,6 +7,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -14,14 +15,16 @@ import { ComponentsModule } from '../components/components.module';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    SettingsComponent
   ],
   exports:
   [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
