@@ -6,7 +6,7 @@ import { PagesComponent } from './pages.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -26,6 +26,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
+    ComponentsModule,
+    
     RouterModule
   ]
 })

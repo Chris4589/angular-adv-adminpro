@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-grafica1',
@@ -6,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class Grafica1Component implements OnInit {
+export class Grafica1Component {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  doughnutChartLabels: string[] = ['apartado 1', 'apartado 2', 'apartado 3'];
+  doughnutChartData= [
+    [124, 56, 567]
+  ];
 }
