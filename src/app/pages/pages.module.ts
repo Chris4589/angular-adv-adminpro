@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 import { SettingsComponent } from './settings/settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { SettingsComponent } from './settings/settings.component';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    SettingsComponent
+    SettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   exports:
   [
@@ -24,7 +28,9 @@ import { SettingsComponent } from './settings/settings.component';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    SettingsComponent
+    SettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   imports: [
     CommonModule,

@@ -5,8 +5,6 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [
     LoginComponent,

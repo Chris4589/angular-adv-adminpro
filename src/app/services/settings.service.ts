@@ -21,7 +21,6 @@ export class SettingsService {
   }
 
   checkTheme(links){
-    console.log(links);
     links.forEach(element => {;
       element.classList.remove('working');
 
@@ -32,8 +31,6 @@ export class SettingsService {
       
       if(btnUrl === currentTheme)
         element.classList.add('working');
-
-        console.log('object');
     });
   }
 }
