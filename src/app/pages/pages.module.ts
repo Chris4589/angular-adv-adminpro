@@ -10,6 +10,8 @@ import { ComponentsModule } from '../components/components.module';
 import { SettingsComponent } from './settings/settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PagesComponent,
     SettingsComponent,
     PromisesComponent,
-    RxjsComponent
+    RxjsComponent,
+    PerfilComponent
   ],
   exports:
   [
@@ -30,12 +33,14 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PagesComponent,
     SettingsComponent,
     PromisesComponent,
-    RxjsComponent
+    RxjsComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ComponentsModule,
+    ReactiveFormsModule,
     
     RouterModule
   ]

@@ -7,6 +7,7 @@ import { RegisterForm } from '../interfaces/register-form.interface';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 const base_url = environment.base_url;
 declare const gapi;
@@ -15,12 +16,21 @@ declare const gapi;
 })
 export class UsuarioService {
   auth2:any;
+  user:User;
+
   constructor(
     private http:HttpClient, 
     private router:Router,
     private ngZone:NgZone
     ) {
     this.googleInit();
+   }
+
+   get getToken():string{
+    return localStorage.getItem('token') || '';
+   }
+   get getId():string{
+    return this.user._id || '';
    }
   googleInit(){
     return new Promise((resolve)=>{
@@ -49,17 +59,20 @@ export class UsuarioService {
   }
 
   validarToken():Observable<boolean>{
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${base_url}/login/renew/`,{
       headers:{
-        token:token
+        token: this.getToken
       }
     }).pipe(
-      tap((response:any)=>{
-        localStorage.setItem('token', response.result);
+      map((response:any)=>{
+        const { token, data } = response.result;
+        const { role, google, _id, nombre, email, img } = data;
+        localStorage.setItem('token', token);
+
+        this.user = new User(role, nombre, email, _id, google, img, '');
+        return true;
       }),
-      map(resp=> true),
       catchError(err=> of(false))
 
     );
@@ -76,6 +89,20 @@ export class UsuarioService {
     );
   }
 
+  updateUsers(data:{nombre:string, email:string}){
+    return this.http.put(`${base_url}/users/?_id=${this.getId}`, data,
+    {
+      headers:{
+        token: this.getToken
+      }
+    })/*.pipe(
+      map((res:any)=>{
+        this.user.nombre = res.result.nombre;
+        this.user.email = res.result.email;
+      })
+    )*/;
+  }
+ 
   userLogin(formData:Login){
     const { remember, ...data } = formData;
     return this.http.post(`${base_url}/login/`, data).pipe(

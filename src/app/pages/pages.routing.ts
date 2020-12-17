@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
         { path: 'settings', component:SettingsComponent, data:{ title:'Settings'} },
         { path: 'grafica1', component:Grafica1Component, data:{ title:'Graphics'} },
         { path: 'promises', component:PromisesComponent, data:{ title:'Promises'} },
-        { path: 'rxjs', component:RxjsComponent, data:{ title:'Rxjs'} }
+        { path: 'rxjs', component:RxjsComponent, data:{ title:'Rxjs'} },
+        { path: 'profile', component:PerfilComponent, data:{ title:'profile'} }
     ]
     },
     //{ path: 'path/:routeParam', component: MyComponent },
