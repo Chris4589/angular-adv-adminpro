@@ -1,0 +1,27 @@
+<div class="fondoModal animate fadeIn fadeInDown" [ngClass]="{'oculto' : modal.getModal}" id="">
+    <div class="modal fade bs-example-modal-lg show" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+        style="display: block;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Cargar Imagen</h4>
+                    <button type="button" (click)="cerrarModal()" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h3>a</h3>
+                    <img *ngIf="!imgTemp" [src]="modal._img" alt="" class="img-fluid">
+                    <img *ngIf="imgTemp" [src]="imgTemp" alt="" class="img-fluid">
+                    <input class="form-control" (change)="changeImg($event)" type="file" name="" id=""><br><br>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="cerrarModal()" class="btn btn-default waves-effect text-left" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="updateImg()" class="btn btn-success waves-effect text-left" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+

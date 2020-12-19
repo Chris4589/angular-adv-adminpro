@@ -3,3 +3,30 @@
 #themecolors .selector{
     cursor: pointer;
 }
+
+.w100{
+    width: 100px;
+}
+
+.avatar{
+    width: 75%;
+    border-radius: 8px;
+}
+.w140{
+    width: 140px;
+}
+
+.fondoModal{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1500;
+}
+.oculto{
+    display: none;
+}

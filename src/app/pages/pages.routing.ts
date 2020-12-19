@@ -9,6 +9,7 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsersComponent } from './mantenimientos/users/users.component';
 
 
 
@@ -24,7 +25,10 @@ const routes: Routes = [
         { path: 'grafica1', component:Grafica1Component, data:{ title:'Graphics'} },
         { path: 'promises', component:PromisesComponent, data:{ title:'Promises'} },
         { path: 'rxjs', component:RxjsComponent, data:{ title:'Rxjs'} },
-        { path: 'profile', component:PerfilComponent, data:{ title:'profile'} }
+        { path: 'profile', component:PerfilComponent, data:{ title:'profile'} },
+
+        //mantenimientos
+        { path: 'users', component:UsersComponent, data:{ title:'Users'} }
     ]
     },
     //{ path: 'path/:routeParam', component: MyComponent },

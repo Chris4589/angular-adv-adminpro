@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Login } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
 
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, delay, map, retry, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
@@ -31,6 +31,13 @@ export class UsuarioService {
    }
    get getId():string{
     return this.user._id || '';
+   }
+   get getHeaders(){
+     return {
+       headers:{
+         token: this.getToken
+       }
+     }
    }
   googleInit(){
     return new Promise((resolve)=>{
@@ -60,11 +67,7 @@ export class UsuarioService {
 
   validarToken():Observable<boolean>{
 
-    return this.http.get(`${base_url}/login/renew/`,{
-      headers:{
-        token: this.getToken
-      }
-    }).pipe(
+    return this.http.get(`${base_url}/login/renew/`, this.getHeaders).pipe(
       map((response:any)=>{
         const { token, data } = response.result;
         const { role, google, _id, nombre, email, img } = data;
@@ -95,12 +98,7 @@ export class UsuarioService {
       headers:{
         token: this.getToken
       }
-    })/*.pipe(
-      map((res:any)=>{
-        this.user.nombre = res.result.nombre;
-        this.user.email = res.result.email;
-      })
-    )*/;
+    });
   }
  
   userLogin(formData:Login){
@@ -117,5 +115,27 @@ export class UsuarioService {
         localStorage.setItem('token', response.result);
       })
     );
+  }
+
+  loadUsers(desde:number = 0){
+    return this.http.get(`${base_url}/users/?start=${desde}`, this.getHeaders).pipe(
+      delay(200),
+      map((res:any)=>{
+        const { data, total } = res.result;
+        
+        const users = data.map(
+          (info:any) => new User(info.role, info.nombre, info.email, info._id, info.google, info.img, '')
+        );
+        return { data:users, total };
+      })
+    );
+  }
+  deleteUserById(_id){
+    return this.http.delete(`${base_url}/users/?_id=${_id}`, this.getHeaders);
+  }
+  updateOneUser(data:User){
+    const { google, _id, password, img, ...usuario } = data;
+
+    return this.http.put(`${base_url}/users/?_id=${_id}`, usuario, this.getHeaders);
   }
 }

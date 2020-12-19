@@ -11,7 +11,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersComponent } from './mantenimientos/users/users.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SettingsComponent,
     PromisesComponent,
     RxjsComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsersComponent
   ],
   exports:
   [
@@ -34,13 +36,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     SettingsComponent,
     PromisesComponent,
     RxjsComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ComponentsModule,
     ReactiveFormsModule,
+    FormsModule,
     
     RouterModule
   ]
