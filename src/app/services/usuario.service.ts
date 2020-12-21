@@ -74,6 +74,7 @@ export class UsuarioService {
         localStorage.setItem('token', token);
 
         this.user = new User(role, nombre, email, _id, google, img, '');
+        //se puede enviar info this.user = data; y usar una pipe para la img
         return true;
       }),
       catchError(err=> of(false))

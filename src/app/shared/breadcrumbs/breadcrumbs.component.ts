@@ -15,7 +15,7 @@ export class BreadcrumbsComponent implements OnInit {
   titleSub:Subscription;
 
   constructor(private router:Router) { 
-    this.titleSub = this.getTitle().subscribe(({title})=>{
+    this.titleSub = this.getTitle().subscribe((title)=>{
       //obtenemos lo enviado y lo seteamos
       this.title = title;
       document.title = `Admin pro - ${title}`;
@@ -34,11 +34,17 @@ export class BreadcrumbsComponent implements OnInit {
   getTitle(){
     return this.router.events.pipe(
       //verifica si es de ese tipo y la filtra
-      filter(dat => dat instanceof ActivationEnd),
+      filter(dat => { 
+        return dat instanceof ActivationEnd 
+      }),
       //de lo antes filtrado filtra el que first chield esta vacio
-      filter( (evento:ActivationEnd) => evento.snapshot.firstChild === null ),
+      filter( (evento:ActivationEnd) => { 
+        return evento.snapshot.firstChild === null
+      } ),
       //envia solo solo snapshot.data
-      map( (evento:ActivationEnd) => evento.snapshot.data )
+      map( (evento:ActivationEnd) => { 
+        return evento.snapshot.data.title
+      } )
     );
   }
 }

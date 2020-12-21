@@ -13,6 +13,10 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './mantenimientos/users/users.component';
+import { DoctorsComponent } from './mantenimientos/doctors/doctors.component';
+import { HospitalsComponent } from './mantenimientos/hospitals/hospitals.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { DoctorComponent } from './mantenimientos/doctors/doctor.component';
 
 
 @NgModule({
@@ -25,7 +29,10 @@ import { UsersComponent } from './mantenimientos/users/users.component';
     PromisesComponent,
     RxjsComponent,
     PerfilComponent,
-    UsersComponent
+    UsersComponent,
+    DoctorsComponent,
+    HospitalsComponent,
+    DoctorComponent
   ],
   exports:
   [
@@ -46,7 +53,8 @@ import { UsersComponent } from './mantenimientos/users/users.component';
     ReactiveFormsModule,
     FormsModule,
     
-    RouterModule
+    RouterModule,
+    PipesModule
   ]
 })
 export class PagesModule { }

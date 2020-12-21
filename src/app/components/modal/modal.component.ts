@@ -41,9 +41,6 @@ export class ModalComponent implements OnInit {
       this.imgTemp = rider.result;//imgbase64
     }
   }
-  viewImg(){
-    console.log(this.modal);
-  }
   updateImg(){
     if(!this.imagenSubir) 
       return;

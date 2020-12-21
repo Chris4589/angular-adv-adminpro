@@ -10,6 +10,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsersComponent } from './mantenimientos/users/users.component';
+import { DoctorsComponent } from './mantenimientos/doctors/doctors.component';
+import { HospitalsComponent } from './mantenimientos/hospitals/hospitals.component';
+import { DoctorComponent } from './mantenimientos/doctors/doctor.component';
 
 
 
@@ -28,7 +31,10 @@ const routes: Routes = [
         { path: 'profile', component:PerfilComponent, data:{ title:'profile'} },
 
         //mantenimientos
-        { path: 'users', component:UsersComponent, data:{ title:'Users'} }
+        { path: 'users', component:UsersComponent, data:{ title:'Users'} },
+        { path: 'hospitals', component:HospitalsComponent, data:{ title:'Hospitals'} },
+        { path: 'doctors', component:DoctorsComponent, data:{ title:'Doctors'} },
+        { path: 'doctors/:id', component:DoctorComponent, data:{ title:'Doctors'} }
     ]
     },
     //{ path: 'path/:routeParam', component: MyComponent },

@@ -35,13 +35,17 @@ export class BusquedasService {
         let data;
         switch (type) {
           case 'users':
-            data = res.result.map(
+            return res.result.map(
               (info:any) => {
                   return new User(info.role, info.nombre, info.email, info._id, info.google, info.img, '');
               });
+
+            case 'hospitals':
+              return res.result;
+
+            case 'doctors':
+              return res.result;
         }
-        
-         return data;
         })
      );
    }
