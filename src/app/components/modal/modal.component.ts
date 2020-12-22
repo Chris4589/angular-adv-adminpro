@@ -48,9 +48,9 @@ export class ModalComponent implements OnInit {
     const { _id, _type } = this.modal;
 
     this.fileUpdate.updatePhoto(this.imagenSubir, _type, _id).subscribe((res:any)=>{
-      console.log(res);
+      
       Swal.fire('Correct!', "Perfil Actualizado", 'success');
-      this.modal.newImage.emit(res);
+      this.modal.newImage.emit(res.result.FileName);
       this.modal.cerrarModal();
     }, (err)=>{
       console.log(err);

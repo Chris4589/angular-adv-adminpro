@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <div class="alert alert-info" role="alert" *ngIf="users && users.length === 0">
+                    No hay Usuarios con ese termino
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td>
+                                    <img class="img-fluid w100" [src]="user.img | imagen:'users'" alt="">
+                                </td>
+                                <td>{{user.nombre}}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Doctores</h4>
+                <div class="alert alert-info" role="alert" *ngIf="doctors && doctors.length === 0">
+                    No hay Doctores con ese termino
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doctor of doctors">
+                                <td>
+                                    <img class="img-fluid w100" [src]="doctor.img | imagen:'hospital'" alt="">
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/doctors', doctor._id]">{{doctor.nombre}}</a>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales</h4>
+                <div class="alert alert-info" role="alert" *ngIf="hospitals && hospitals.length === 0">
+                    No hay Hospitales con ese termino
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitals">
+                                <td>
+                                    <img class="img-fluid w100" [src]="hospital.img | imagen:'hospital'" alt="">
+                                </td>
+                                <td>{{hospital.nombre}}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

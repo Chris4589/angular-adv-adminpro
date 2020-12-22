@@ -39,7 +39,7 @@ export class DoctorsService {
 
   updateDoctor(doctor:Doctor){console.log(doctor);
     const { _id, ...data } = doctor;
-    console.log(data);
+
     return this.http.put(`${base_url}/doctors/?_id=${_id}`, data, this.getHeaders);
   }
   deleteDoctor(_id){

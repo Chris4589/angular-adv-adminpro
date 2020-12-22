@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
 
   urlImg:User;
   constructor(
-    private usService:UsuarioService
+    private usService:UsuarioService,
+    private _router:Router
   ) {
     this.urlImg = usService.user;
    }
@@ -22,5 +23,11 @@ export class HeaderComponent implements OnInit {
   }
   user_Logout(){
     this.usService.logOut();
+  }
+  buscar(dato:string){
+    if(!dato)
+      return;
+
+    this._router.navigateByUrl(`/dashboard/buscar/${dato}`);
   }
 }

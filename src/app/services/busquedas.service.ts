@@ -49,4 +49,12 @@ export class BusquedasService {
         })
      );
    }
+
+   searchesAll(fact){
+     return this.http.get(`${url_base}/todo/?search=${fact}`, this.getHeaders).pipe(
+       map(({ result:{ users, doctors, hospitals } }:any )=>{
+        return { users, doctors, hospitals };
+       })
+     );
+   }
 }

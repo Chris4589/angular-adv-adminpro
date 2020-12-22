@@ -32,7 +32,7 @@ export class DoctorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
     this.ActivatedRoute.params.subscribe(({ id })=>{
 
       if(id && id !== 'nuevo'){
@@ -43,10 +43,9 @@ export class DoctorComponent implements OnInit {
           this.medicoForm.setValue({
             nombre,
             hospital:_id
-          })
+          });
         }, err=>{
           this._router.navigateByUrl('/dashboard/doctors');
-          console.log(err);
         });
       }
     });
@@ -65,8 +64,12 @@ export class DoctorComponent implements OnInit {
 
     this.medicoForm.get('hospital').valueChanges.pipe(delay(1000)).subscribe((hospId)=>{
       this.hospitalSelected = this.hospitalesOptions.find( h => h._id === hospId );
+      console.log('tick');
     });
-
+    
+    this._modal.newImage.subscribe((res:string)=>{
+      this.medicoSelected.img = res;
+    });
   }
   saveDoctor(){
 
@@ -75,11 +78,9 @@ export class DoctorComponent implements OnInit {
         ...this.medicoForm.value,
         _id:this.medicoSelected._id
       }
-      console.log(this.medicoForm.value);
       this._serviceDoctors.updateDoctor(data).subscribe((res:any)=>{
-        console.log(res);
+        Swal.fire('Actualizaco', 'se actualizo correctamente', 'success');
       }, (err)=>{
-        console.log(err);
         Swal.fire('no actualizo', 'No se actualizo', 'error');
       });
       return;
@@ -87,7 +88,6 @@ export class DoctorComponent implements OnInit {
 
     const { nombre, hospital } = this.medicoForm.value;
     this._serviceDoctors.createDoctor(nombre, hospital).subscribe((res:any)=>{
-      console.log(res);
       Swal.fire('Creado', 'se creo correctamente', 'success');
 
       this._router.navigateByUrl(`/dashboard/doctors/${res.result._id}`)

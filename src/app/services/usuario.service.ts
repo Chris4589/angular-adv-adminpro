@@ -26,6 +26,10 @@ export class UsuarioService {
     this.googleInit();
    }
 
+   get getRole():string{
+     return this.user.role;
+   }
+
    get getToken():string{
     return localStorage.getItem('token') || '';
    }
@@ -39,6 +43,7 @@ export class UsuarioService {
        }
      }
    }
+  
   googleInit(){
     return new Promise((resolve)=>{
       gapi.load('auth2', ()=>{
@@ -57,6 +62,8 @@ export class UsuarioService {
   }
   logOut(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+    //borra menu
     
     this.auth2.signOut().then( ()=> {
       this.ngZone.run(()=>{
@@ -69,9 +76,11 @@ export class UsuarioService {
 
     return this.http.get(`${base_url}/login/renew/`, this.getHeaders).pipe(
       map((response:any)=>{
-        const { token, data } = response.result;
+        console.log(`hola${response}`);
+        const { token, data, menu } = response.result;
         const { role, google, _id, nombre, email, img } = data;
         localStorage.setItem('token', token);
+        localStorage.setItem('menu', JSON.stringify(menu));
 
         this.user = new User(role, nombre, email, _id, google, img, '');
         //se puede enviar info this.user = data; y usar una pipe para la img
@@ -88,7 +97,10 @@ export class UsuarioService {
     //express-joi-validation no acepta otros campos que no registre
     return this.http.post(`${base_url}/users/`, data).pipe(
       tap((response:any)=>{
-        localStorage.setItem('token', response.result);
+        console.log(response.result.token);
+        localStorage.setItem('token', response.result.token);
+        localStorage.setItem('menu', JSON.stringify(response.result.menu));
+        return response.result;
       })
     );
   }
@@ -106,14 +118,16 @@ export class UsuarioService {
     const { remember, ...data } = formData;
     return this.http.post(`${base_url}/login/`, data).pipe(
       tap((response:any)=>{
-        localStorage.setItem('token', response.result);
+        localStorage.setItem('token', response.result.generarToken);
+        localStorage.setItem('menu', JSON.stringify(response.result.menu));
       })
     );
   }
   googleSign(token:string){
     return this.http.post(`${base_url}/login/google/`, {token}).pipe(
       tap((response:any)=>{
-        localStorage.setItem('token', response.result);
+        localStorage.setItem('token', response.result.token_jwt);
+        localStorage.setItem('menu', JSON.stringify(response.result.menu));
       })
     );
   }
