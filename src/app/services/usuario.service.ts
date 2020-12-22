@@ -17,6 +17,7 @@ declare const gapi;
 export class UsuarioService {
   auth2:any;
   user:User;
+  logged:boolean;
 
   constructor(
     private http:HttpClient, 
@@ -63,6 +64,8 @@ export class UsuarioService {
   logOut(){
     localStorage.removeItem('token');
     localStorage.removeItem('menu');
+    this.logged = false;
+    //this.user = null;
     //borra menu
     
     this.auth2.signOut().then( ()=> {
@@ -76,12 +79,11 @@ export class UsuarioService {
 
     return this.http.get(`${base_url}/login/renew/`, this.getHeaders).pipe(
       map((response:any)=>{
-        console.log(`hola${response}`);
         const { token, data, menu } = response.result;
         const { role, google, _id, nombre, email, img } = data;
         localStorage.setItem('token', token);
         localStorage.setItem('menu', JSON.stringify(menu));
-
+        this.logged = true;
         this.user = new User(role, nombre, email, _id, google, img, '');
         //se puede enviar info this.user = data; y usar una pipe para la img
         return true;
@@ -100,6 +102,7 @@ export class UsuarioService {
         console.log(response.result.token);
         localStorage.setItem('token', response.result.token);
         localStorage.setItem('menu', JSON.stringify(response.result.menu));
+        this.logged = true;
         return response.result;
       })
     );
@@ -120,6 +123,7 @@ export class UsuarioService {
       tap((response:any)=>{
         localStorage.setItem('token', response.result.generarToken);
         localStorage.setItem('menu', JSON.stringify(response.result.menu));
+        this.logged = true;
       })
     );
   }
@@ -128,6 +132,7 @@ export class UsuarioService {
       tap((response:any)=>{
         localStorage.setItem('token', response.result.token_jwt);
         localStorage.setItem('menu', JSON.stringify(response.result.menu));
+        this.logged = true;
       })
     );
   }
